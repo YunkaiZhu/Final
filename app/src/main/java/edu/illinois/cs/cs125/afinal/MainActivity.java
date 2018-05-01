@@ -15,6 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -100,6 +104,13 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(final JSONObject response) {
                             try {
                                 Log.d(TAG, response.toString(2));
+                                TextView textView = findViewById(R.id.textView);
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                JsonParser jsonParser = new JsonParser();
+                                JsonElement jsonElement = jsonParser.parse(response.toString());
+                                String prettyJsonString = gson.toJson(jsonElement);
+                                textView.setText(prettyJsonString);
+                                textView.setVisibility(View.VISIBLE);
                             } catch (JSONException ignored) { }
                         }
                     }, new Response.ErrorListener() {

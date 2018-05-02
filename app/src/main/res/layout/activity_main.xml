@@ -29,16 +29,17 @@
         android:text="DIRECTION" />
 
     <Button
-        android:id="@+id/random"
+        android:id="@+id/update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="RANDOM" />
+        android:text="UPDATE" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>

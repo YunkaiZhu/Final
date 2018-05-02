@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONException;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "Windspeed clicked");
+                callWindSpeed();
             }
         });
         final Button direction = findViewById(R.id.direction);
@@ -61,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Direction clicked");
             }
         });
-        final Button random = findViewById(R.id.random);
-        random.setOnClickListener(new View.OnClickListener() {
+        final Button update = findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "Random button clicked");
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final TextView text = findViewById(R.id.textView);
+        text.setVisibility(View.INVISIBLE);
     }
     void startAPICall() {
         try {
@@ -86,7 +89,41 @@ public class MainActivity extends AppCompatActivity {
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 JsonParser jsonParser = new JsonParser();
                                 JsonElement jsonElement = jsonParser.parse(response.toString());
-                                String prettyJsonString = gson.toJson(jsonElement);
+                                JsonElement wind = jsonElement.getAsJsonObject().get("wind");
+                                String prettyJsonString = gson.toJson(wind);
+                                textView.setText(prettyJsonString);
+                                textView.setVisibility(View.VISIBLE);
+                            } catch (JSONException ignored) { }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(final VolleyError error) {
+                    Log.e(TAG, error.toString());
+                }
+            });
+            requestQueue.add(jsonObjectRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    void callWindSpeed() {
+        try {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    "http://api.openweathermap.org/data/2.5/weather?zip=61820,us&appid=" + BuildConfig.API_KEY,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(final JSONObject response) {
+                            try {
+                                Log.d(TAG, response.toString(2));
+                                TextView textView = findViewById(R.id.textView);
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                JsonParser jsonParser = new JsonParser();
+                                JsonElement jsonElement = jsonParser.parse(response.toString());
+                                JsonElement wind = jsonElement.getAsJsonObject().get("wind");
+                                JsonElement speed = wind.getAsJsonObject().get("speed");
+                                String prettyJsonString = gson.toJson(speed);
                                 textView.setText(prettyJsonString);
                                 textView.setVisibility(View.VISIBLE);
                             } catch (JSONException ignored) { }

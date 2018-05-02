@@ -7,47 +7,26 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <CheckBox
-        android:id="@+id/American"
+    <Button
+        android:id="@+id/windmap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="AMERICAN" />
+        android:text="WIND MAP" />
 
-    <CheckBox
-        android:id="@+id/Chinese"
+    <Button
+        android:id="@+id/windspeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="CHINESE" />
+        android:text="WIND SPEED" />
 
-    <CheckBox
-        android:id="@+id/Korean"
+    <Button
+        android:id="@+id/direction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="KOREAN" />
-
-    <CheckBox
-        android:id="@+id/Italian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="ITALIAN" />
-
-    <CheckBox
-        android:id="@+id/Mexican"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="MEXICAN" />
-
-    <CheckBox
-        android:id="@+id/Thai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="THAI" />
+        android:text="DIRECTION" />
 
     <Button
         android:id="@+id/random"
@@ -59,7 +38,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_weight="1"
         android:text="TextView" />
 </LinearLayout>

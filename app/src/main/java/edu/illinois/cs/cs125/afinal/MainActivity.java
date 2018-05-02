@@ -40,46 +40,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(TAG,"Our app was created");
 
-        final CheckBox american = findViewById(R.id.American);
-        american.setOnClickListener(new View.OnClickListener() {
+        final Button windmap = findViewById(R.id.windmap);
+        windmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Log.d(TAG, "American check box clicked");
+                Log.d(TAG, "Windmap clicked");
             }
         });
-        final CheckBox chinese = findViewById(R.id.Chinese);
-        chinese.setOnClickListener(new View.OnClickListener() {
+        final Button windspeed = findViewById(R.id.windspeed);
+        windspeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Log.d(TAG, "Chinese check box clicked");
+                Log.d(TAG, "Windspeed clicked");
             }
         });
-        final CheckBox korean = findViewById(R.id.Korean);
-        korean.setOnClickListener(new View.OnClickListener() {
+        final Button direction = findViewById(R.id.direction);
+        direction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Log.d(TAG, "Korean check box clicked");
-            }
-        });
-        final CheckBox italian = findViewById(R.id.Italian);
-        italian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Log.d(TAG, "Italian check box clicked");
-            }
-        });
-        final CheckBox mexican = findViewById(R.id.Mexican);
-        mexican.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Log.d(TAG, "Mexican check box clicked");
-            }
-        });
-        final CheckBox thai = findViewById(R.id.Thai);
-        thai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Log.d(TAG, "Thai check box clicked");
+                Log.d(TAG, "Direction clicked");
             }
         });
         final Button random = findViewById(R.id.random);
@@ -96,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "api.yelp.com/v3"
-                            + BuildConfig.API_KEY,
+                    "http://api.openweathermap.org/data/2.5/weather?zip=61820,us&appid=" + BuildConfig.API_KEY,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override

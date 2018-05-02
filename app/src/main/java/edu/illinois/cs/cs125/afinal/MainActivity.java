@@ -1,12 +1,15 @@
 package edu.illinois.cs.cs125.afinal;
 
 import android.app.DownloadManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -30,10 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyApplication:Main";
 
+    ImageView image;
+
     RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"onCreat ran");
+        Log.d(TAG,"onCreate ran");
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -42,12 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"Our app was created");
 
         final Button windmap = findViewById(R.id.windmap);
-        windmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Log.d(TAG, "Windmap clicked");
-            }
-        });
+
         final Button windspeed = findViewById(R.id.windspeed);
         windspeed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         });
         final TextView text = findViewById(R.id.textView);
         text.setVisibility(View.INVISIBLE);
+    }
+
+    public void browser(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.windy.com/?40.110,-88.212,5"));
+        startActivity(browserIntent);
+    }
+
+    public void addListenerOnButton() {
+        image = (ImageView) findViewById(R.id.imageView);
     }
     void startAPICall() {
         try {
